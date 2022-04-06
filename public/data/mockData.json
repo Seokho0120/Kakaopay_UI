@@ -1,0 +1,13 @@
+{
+  'SIGNUP_INPUTS' : [
+  {
+    name: 'ID',
+    type: 'ID',
+    placeholder: '카카오계정 (이메일)',
+  },
+  {
+    name: 'password',
+    type: 'password',
+    placeholder: '비밀번호',
+  },
+];}

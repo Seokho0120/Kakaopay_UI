@@ -2,24 +2,67 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../assets/Logo.png';
+import SignInput from '../components/SignInput/SignInput';
 
 export default function Login() {
   const navigate = useNavigate();
   const goToMain = () => {
     navigate('/SignUp');
   };
-  // const [productNum, setProductNum] = useState('');
-  // const handleProductNum = e => {
-  //   setProductNum(e.target.value);
-  // };
 
+  const [idText, setIdText] = useState('');
+  const [pwText, setPwText] = useState('');
+
+  const handleId = e => {
+    setIdText(e.target.value);
+  };
+
+  const handlePw = e => {
+    setPwText(e.target.value);
+  };
+
+  const isVariable = idText.includes('@') && pwText.length > 5;
+
+  const isTrue = () =>
+    isVariable ? alert('로그인 성공') : alert('로그인 실패!');
+
+  const SIGNUP_INPUTS = [
+    {
+      name: 'ID',
+      type: 'ID',
+      placeholder: '카카오계정 (이메일)',
+      onchange: handleId,
+    },
+    {
+      name: 'password',
+      type: 'password',
+      placeholder: '비밀번호',
+      onchange: handlePw,
+    },
+  ];
+
+  // console.log(isVariable);
+  // console.log(idText);
+  // console.log(pwText);
   return (
     <Container>
       <Title />
       <LoginAndPwd>
-        <Log />
-        <Pwd />
-        <Btn>로그인</Btn>
+        {SIGNUP_INPUTS.map(element => {
+          return (
+            <SignInput
+              key={element.name}
+              name={element.name}
+              type={element.type}
+              value={element.value}
+              placeholder={element.placeholder}
+              onchange={element.onchange}
+            />
+          );
+        })}
+        <LoginBtn isVariable={isVariable} onClick={isTrue}>
+          로그인
+        </LoginBtn>
       </LoginAndPwd>
       <BottomMenu>
         <SignBtn onClick={goToMain}>회원가입</SignBtn>
@@ -49,34 +92,7 @@ const LoginAndPwd = styled.div`
   flex-direction: column;
 `;
 
-const Log = styled.input.attrs(props => ({
-  type: 'text',
-  placeholder: '카카오계정 (이메일)',
-}))`
-  color: #000000;
-  font-size: 16px;
-  padding: 10px 10px 10px 0;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #c4c4c4;
-  &:focus {
-    outline: none;
-  }
-`;
-
-const Pwd = styled.input.attrs(props => ({
-  type: 'text',
-  placeholder: '비밀번호',
-}))`
-  color: #000000;
-  font-size: 16px;
-  padding: 10px 10px 10px 0;
-  border-bottom: 1px solid #c4c4c4;
-  &:focus {
-    outline: none;
-  }
-`;
-
-const Btn = styled.button`
+const LoginBtn = styled.button`
   display: flex;
   justify-content: center;
   border-radius: 12px;
@@ -84,7 +100,10 @@ const Btn = styled.button`
   padding: 14px 18px 14px 18px;
   margin-top: 40px;
   font-size: 16px;
-  background-color: #fee500;
+  background-color: ${props => (props.isVariable ? '#fee500' : '#eaeaea')};
+
+  /* background-color: #eaeaea; */
+  /* background-color: #fee500; */
 `;
 
 const BottomMenu = styled.div`
@@ -95,8 +114,10 @@ const BottomMenu = styled.div`
 `;
 
 const SignBtn = styled.button`
+  background-color: white;
   font-size: 12px;
   border-bottom: 1px solid #c4c4c4;
+  cursor: pointer;
 `;
 
 const Etc = styled.div`

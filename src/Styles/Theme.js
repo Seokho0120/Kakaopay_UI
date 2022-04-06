@@ -2,6 +2,7 @@ const theme = {
   mainYellow: '#fee500',
   fontBlack: '000000',
   GreyColor: '#c4c4c4',
+  LightGreyColor: '#eaeaea',
   borderRadius: '12px',
   fontBold: '32px',
   fontMedium: '14px',
