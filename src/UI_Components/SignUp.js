@@ -1,10 +1,92 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../assets/Logo.png';
 import SignInput from '../components/SignInput/SignInput';
 import CountInput from '../components/CountInput/CountInput';
 
 export default function SignUP() {
+  const navigate = useNavigate();
+  const goToLogin = () => {
+    navigate('/Login');
+  };
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('');
+  const [birth, setBirth] = useState('');
+
+  const onEmailHandler = e => {
+    setEmail(e.currentTarget.value);
+  };
+
+  const onPasswordHandler = e => {
+    setPassword(e.currentTarget.value);
+  };
+
+  const onConfirmPasswordHandler = e => {
+    setConfirmPassword(e.currentTarget.value);
+  };
+
+  const onNameHandler = e => {
+    setName(e.currentTarget.value);
+  };
+
+  const isSignUpVariable =
+    email.includes('@') &&
+    password.length > 5 &&
+    password.length === confirmPassword.length &&
+    name.length >= 2;
+
+  const isTrue = () =>
+    isSignUpVariable ? alert('로그인 성공') : alert('로그인 실패!');
+
+  const SIGNUP_INPUTS = [
+    {
+      name: 'ID',
+      type: 'ID',
+      placeholder: '카카오계정 (이메일)',
+      onchange: onEmailHandler,
+    },
+    {
+      name: 'password',
+      type: 'password',
+      placeholder: '비밀번호',
+      onchange: onPasswordHandler,
+    },
+    {
+      name: 'ConfirmPassword',
+      type: 'password',
+      placeholder: '비밀번호 확인',
+      onchange: onConfirmPasswordHandler,
+    },
+    {
+      name: 'name',
+      type: 'name',
+      placeholder: '이름',
+      onchange: onNameHandler,
+    },
+  ];
+
+  const SIGNUP_BIRTH = [
+    {
+      name: 'year',
+      type: 'number',
+      placeholder: '년',
+    },
+    {
+      name: 'month',
+      type: 'number',
+      placeholder: '월',
+    },
+    {
+      name: 'day',
+      type: 'number',
+      placeholder: '일',
+    },
+  ];
+
   return (
     <Container>
       <Title />
@@ -18,6 +100,7 @@ export default function SignUP() {
               name={element.name}
               type={element.type}
               placeholder={element.placeholder}
+              onchange={element.onchange}
             />
           );
         })}
@@ -29,55 +112,21 @@ export default function SignUP() {
                 name={element.name}
                 type={element.type}
                 placeholder={element.placeholder}
+                onchange={element.onchange}
               />
             );
           })}
         </Birth>
       </LoginAndPwd>
-      <GenderBtn>
-        <Male>뒤로</Male>
-        <Female>확인</Female>
-      </GenderBtn>
-      <AgreeBtn></AgreeBtn>
+      <SignBtn>
+        <Back onClick={goToLogin}>뒤로</Back>
+        <Confirm isSignUpVariable={isSignUpVariable} onClick={isTrue}>
+          확인
+        </Confirm>
+      </SignBtn>
     </Container>
   );
 }
-
-const SIGNUP_INPUTS = [
-  {
-    name: 'ID',
-    type: 'ID',
-    placeholder: '카카오계정 (이메일)',
-  },
-  {
-    name: 'password',
-    type: 'password',
-    placeholder: '비밀번호',
-  },
-  {
-    name: 'phone',
-    type: 'phone',
-    placeholder: '비밀번호 확인',
-  },
-];
-
-const SIGNUP_BIRTH = [
-  {
-    name: 'year',
-    type: 'text',
-    placeholder: '년',
-  },
-  {
-    name: 'month',
-    type: 'text',
-    placeholder: '월',
-  },
-  {
-    name: 'day',
-    type: 'text',
-    placeholder: '일',
-  },
-];
 
 const Container = styled.div`
   display: flex;
@@ -115,39 +164,37 @@ const Birth = styled.div`
   justify-content: space-between;
 `;
 
-const GenderBtn = styled.div`
+const SignBtn = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 8px;
 `;
 
-const Male = styled.button`
+const Back = styled.button`
   display: flex;
   justify-content: center;
-  width: 46%;
+  width: 48%;
   padding: 10px;
   font-size: 16px;
   border-radius: 12px;
   background-color: #f2f2f2;
-  /* background-color: #fee500; */
+  &:hover {
+    background-color: #fee500;
+    cursor: pointer;
+  }
 `;
 
-const Female = styled.button`
+const Confirm = styled.button`
   display: flex;
   justify-content: center;
-  width: 46%;
+  width: 48%;
   padding: 10px;
   font-size: 16px;
   border-radius: 12px;
-
   background-color: #f2f2f2;
-`;
-
-const Phone = styled.div`
-  display: flex;
-`;
-
-const AgreeBtn = styled.div`
-  display: flex;
+  &:hover {
+    background-color: #fee500;
+    cursor: pointer;
+  }
 `;

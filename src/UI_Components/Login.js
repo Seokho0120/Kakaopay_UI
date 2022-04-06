@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../assets/Logo.png';
@@ -6,7 +6,7 @@ import SignInput from '../components/SignInput/SignInput';
 
 export default function Login() {
   const navigate = useNavigate();
-  const goToMain = () => {
+  const goToSign = () => {
     navigate('/SignUp');
   };
 
@@ -44,6 +44,7 @@ export default function Login() {
   // console.log(isVariable);
   // console.log(idText);
   // console.log(pwText);
+
   return (
     <Container>
       <Title />
@@ -65,7 +66,7 @@ export default function Login() {
         </LoginBtn>
       </LoginAndPwd>
       <BottomMenu>
-        <SignBtn onClick={goToMain}>회원가입</SignBtn>
+        <SignBtn onClick={goToSign}>회원가입</SignBtn>
         <Etc>카카오계정 | 비밀번호 찾기</Etc>
       </BottomMenu>
     </Container>
