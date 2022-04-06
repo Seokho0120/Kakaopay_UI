@@ -15,7 +15,6 @@ export default function SignUP() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
-  const [birth, setBirth] = useState('');
 
   const onEmailHandler = e => {
     setEmail(e.currentTarget.value);
@@ -139,12 +138,12 @@ const Title = styled.img.attrs({
   src: `${Logo}`,
 })`
   width: 60vw;
-  margin: 60px;
+  margin-bottom: 30px;
 `;
 
 const SignUpTitle = styled.div`
   font-size: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 const SignUpSub = styled.div`
