@@ -41,10 +41,6 @@ export default function Login() {
     },
   ];
 
-  // console.log(isVariable);
-  // console.log(idText);
-  // console.log(pwText);
-
   return (
     <Container>
       <Title />
@@ -102,9 +98,6 @@ const LoginBtn = styled.button`
   margin-top: 40px;
   font-size: 16px;
   background-color: ${props => (props.isVariable ? '#fee500' : '#eaeaea')};
-
-  /* background-color: #eaeaea; */
-  /* background-color: #fee500; */
 `;
 
 const BottomMenu = styled.div`
