@@ -44,7 +44,7 @@ export default function SignUP() {
     birthValidate;
 
   const isTrue = () =>
-    isSignUpVariable ? alert('로그인 성공') : alert('로그인 실패!');
+    isSignUpVariable ? alert('회원가입 성공') : alert('회원가입 실패!');
 
   const SIGNUP_INPUTS = [
     {

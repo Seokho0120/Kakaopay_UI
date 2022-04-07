@@ -12,7 +12,10 @@ const Button = styled.button`
   padding: 5px;
   font-size: ${({ theme }) => theme.fontSize.fontMedium};
   border-radius: 12px;
-  background-color: ${({ theme }) => theme.color.LightGreyColor};
+  background-color: ${props =>
+    props.isSignUpVariable
+      ? ({ theme }) => theme.color.mainYellow
+      : ({ theme }) => theme.color.LightGreyColor};
   &:hover {
     background-color: ${({ theme }) => theme.color.mainYellow};
     cursor: pointer;
