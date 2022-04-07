@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function CountInput({
+export default function BirthInput({
   name,
   type,
   placeholder,
@@ -13,8 +13,8 @@ export default function CountInput({
       name={name}
       type={type}
       placeholder={placeholder}
-      value={value}
-      onchange={onchange}
+      defaultValue={value}
+      onChange={onchange}
     />
   );
 }
@@ -24,10 +24,10 @@ const InputForm = styled.input`
   justify-content: space-between;
   width: 25%;
   color: #000000;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.fontSize.fontMedium};
   padding: 10px 10px 10px 0;
   margin-bottom: 20px;
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid ${({ theme }) => theme.color.GreyColor};
   &:focus {
     outline: none;
   }

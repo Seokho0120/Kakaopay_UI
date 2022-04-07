@@ -10,34 +10,37 @@ export default function Login() {
     navigate('/SignUp');
   };
 
-  const [idText, setIdText] = useState('');
-  const [pwText, setPwText] = useState('');
+  const [loginInfo, setLoginInfo] = useState({
+    email: '',
+    password: '',
+  });
 
-  const handleId = e => {
-    setIdText(e.target.value);
+  const handlerForm = e => {
+    const { name, value } = e.target;
+    setLoginInfo({
+      ...loginInfo,
+      [name]: value,
+    });
   };
 
-  const handlePw = e => {
-    setPwText(e.target.value);
-  };
-
-  const isVariable = idText.includes('@') && pwText.length > 5;
+  const isVariable =
+    loginInfo.email.includes('@') && loginInfo.password.length > 5;
 
   const isTrue = () =>
     isVariable ? alert('로그인 성공') : alert('로그인 실패!');
 
   const SIGNUP_INPUTS = [
     {
-      name: 'ID',
-      type: 'ID',
+      name: 'email',
+      type: 'id',
       placeholder: '카카오계정 (이메일)',
-      onchange: handleId,
+      onchange: handlerForm,
     },
     {
       name: 'password',
       type: 'password',
       placeholder: '비밀번호',
-      onchange: handlePw,
+      onchange: handlerForm,
     },
   ];
 
@@ -96,8 +99,11 @@ const LoginBtn = styled.button`
   width: 100%;
   padding: 14px 18px 14px 18px;
   margin-top: 40px;
-  font-size: 16px;
-  background-color: ${props => (props.isVariable ? '#fee500' : '#eaeaea')};
+  font-size: ${({ theme }) => theme.fontSize.fontMedium};
+  background-color: ${props =>
+    props.isVariable
+      ? ({ theme }) => theme.color.mainYellow
+      : ({ theme }) => theme.color.LightGreyColor};
 `;
 
 const BottomMenu = styled.div`
@@ -109,11 +115,11 @@ const BottomMenu = styled.div`
 
 const SignBtn = styled.button`
   background-color: white;
-  font-size: 12px;
-  border-bottom: 1px solid #c4c4c4;
+  font-size: ${({ theme }) => theme.fontSize.fontSmall};
+  border-bottom: 1px solid ${({ theme }) => theme.color.GreyColor};
   cursor: pointer;
 `;
 
 const Etc = styled.div`
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fontSize.fontSmall};
 `;

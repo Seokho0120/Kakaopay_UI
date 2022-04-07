@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../assets/Logo.png';
 import SignInput from '../components/SignInput/SignInput';
-import CountInput from '../components/CountInput/CountInput';
+import BirthInput from '../components/CountInput/CountInput';
+import BtnForm from '../components/Button/BtnForm';
 
 export default function SignUP() {
   const navigate = useNavigate();
@@ -11,60 +12,64 @@ export default function SignUP() {
     navigate('/Login');
   };
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [name, setName] = useState('');
+  const [userInfo, setUserInfo] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    name: '',
+    year: '',
+    month: '',
+    day: '',
+  });
 
-  const onEmailHandler = e => {
-    setEmail(e.currentTarget.value);
+  const handlerForm = e => {
+    const { name, value } = e.target;
+    setUserInfo({
+      ...userInfo,
+      [name]: value,
+    });
   };
 
-  const onPasswordHandler = e => {
-    setPassword(e.currentTarget.value);
-  };
-
-  const onConfirmPasswordHandler = e => {
-    setConfirmPassword(e.currentTarget.value);
-  };
-
-  const onNameHandler = e => {
-    setName(e.currentTarget.value);
-  };
+  const { year, month, day } = userInfo;
+  const yearCheck = 1900 <= year && year <= 2021;
+  const monthCheck = 1 <= month && month <= 12;
+  const dayCheck = 1 <= day && day <= 31;
+  const birthValidate = yearCheck && monthCheck && dayCheck;
 
   const isSignUpVariable =
-    email.includes('@') &&
-    password.length > 5 &&
-    password.length === confirmPassword.length &&
-    name.length >= 2;
+    userInfo.email.includes('@') &&
+    userInfo.password.length > 5 &&
+    userInfo.password.length === userInfo.confirmPassword.length &&
+    userInfo.name.length >= 2 &&
+    birthValidate;
 
   const isTrue = () =>
     isSignUpVariable ? alert('로그인 성공') : alert('로그인 실패!');
 
   const SIGNUP_INPUTS = [
     {
-      name: 'ID',
-      type: 'ID',
+      name: 'email',
+      type: 'id',
       placeholder: '카카오계정 (이메일)',
-      onchange: onEmailHandler,
+      onchange: handlerForm,
     },
     {
       name: 'password',
       type: 'password',
       placeholder: '비밀번호',
-      onchange: onPasswordHandler,
+      onchange: handlerForm,
     },
     {
-      name: 'ConfirmPassword',
+      name: 'confirmPassword',
       type: 'password',
       placeholder: '비밀번호 확인',
-      onchange: onConfirmPasswordHandler,
+      onchange: handlerForm,
     },
     {
       name: 'name',
       type: 'name',
       placeholder: '이름',
-      onchange: onNameHandler,
+      onchange: handlerForm,
     },
   ];
 
@@ -73,23 +78,26 @@ export default function SignUP() {
       name: 'year',
       type: 'number',
       placeholder: '년',
+      onchange: handlerForm,
     },
     {
       name: 'month',
       type: 'number',
       placeholder: '월',
+      onchange: handlerForm,
     },
     {
       name: 'day',
       type: 'number',
       placeholder: '일',
+      onchange: handlerForm,
     },
   ];
 
   return (
     <Container>
       <Title />
-      <LoginAndPwd>
+      <SignContainer>
         <SignUpTitle>회원가입</SignUpTitle>
         <SignUpSub>계정으로 사용할 이메일 주소를 입력하세요.</SignUpSub>
         {SIGNUP_INPUTS.map(element => {
@@ -103,10 +111,10 @@ export default function SignUP() {
             />
           );
         })}
-        <Birth>
+        <BirthContainer>
           {SIGNUP_BIRTH.map(element => {
             return (
-              <CountInput
+              <BirthInput
                 key={element.name}
                 name={element.name}
                 type={element.type}
@@ -115,13 +123,15 @@ export default function SignUP() {
               />
             );
           })}
-        </Birth>
-      </LoginAndPwd>
+        </BirthContainer>
+      </SignContainer>
       <SignBtn>
-        <Back onClick={goToLogin}>뒤로</Back>
-        <Confirm isSignUpVariable={isSignUpVariable} onClick={isTrue}>
-          확인
-        </Confirm>
+        <BtnForm onClick={goToLogin} text="뒤로" />
+        <BtnForm
+          text="확인"
+          isSignUpVariable={isSignUpVariable}
+          onClick={isTrue}
+        />
       </SignBtn>
     </Container>
   );
@@ -142,22 +152,22 @@ const Title = styled.img.attrs({
 `;
 
 const SignUpTitle = styled.div`
-  font-size: 28px;
+  font-size: ${({ theme }) => theme.fontSize.fontLarge};
   margin-bottom: 10px;
 `;
 
 const SignUpSub = styled.div`
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fontSize.fontSmall};
   margin-bottom: 26px;
 `;
 
-const LoginAndPwd = styled.div`
+const SignContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
 
-const Birth = styled.div`
+const BirthContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -168,32 +178,4 @@ const SignBtn = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 8px;
-`;
-
-const Back = styled.button`
-  display: flex;
-  justify-content: center;
-  width: 48%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 12px;
-  background-color: #f2f2f2;
-  &:hover {
-    background-color: #fee500;
-    cursor: pointer;
-  }
-`;
-
-const Confirm = styled.button`
-  display: flex;
-  justify-content: center;
-  width: 48%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 12px;
-  background-color: #f2f2f2;
-  &:hover {
-    background-color: #fee500;
-    cursor: pointer;
-  }
 `;

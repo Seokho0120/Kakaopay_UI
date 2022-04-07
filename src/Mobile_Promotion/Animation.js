@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import MobileCard from '../assets/MobileCard.png';
 import MobileText from '../assets/MobileText.png';
@@ -6,10 +6,6 @@ import MobileCharacter from '../assets/MobileCharacter.png';
 import Light from '../assets/Light.png';
 
 export default function MobileAnimation() {
-  const [lgithActive, setLgithActive] = useState('');
-
-  const isActive = setTimeout(() => {});
-
   return (
     <Container>
       <TitleText />
@@ -30,7 +26,7 @@ const Container = styled.div`
   padding: 40px;
   width: 100vw;
   height: 100vh;
-  background-color: #00aa47;
+  background-color: ${({ theme }) => theme.color.mainGreenColor};
 `;
 
 const TitleText = styled.img.attrs({
@@ -135,20 +131,7 @@ const Btn = styled.button`
   border-radius: 12px;
   width: 100%;
   padding: 16px;
-  font-size: 22px;
+  font-size: ${({ theme }) => theme.fontSize.fontLargeMedium};
   animation: ${BtnAni} 1.5s alternate;
   animation-delay: 0.5s;
 `;
-
-/* setTimeout(function () {
-  console.log(
-    '1초 동안 빛이 생겨서 오른쪽 이동 후 사라짐+ 버튼 작아졌다 커졌다'
-  );
-}, 1000);
-
-setTimeout(function () {
-  console.log('빛 효과가 끝나면 캐릭터 나타나서 내려갔다가 사라짐');
-}, 2000); */
-
-// state로 빛 / 캐릭터 관리
-// setTimeout 1500후에 false로 / useEffect안에

@@ -1,21 +1,20 @@
-const theme = {
+const color = {
   mainYellow: '#fee500',
   fontBlack: '000000',
   GreyColor: '#c4c4c4',
   LightGreyColor: '#eaeaea',
-  borderRadius: '12px',
-  fontBold: '32px',
-  fontMedium: '14px',
-  fontSmall: '12px',
-  topSpace: '70px',
-  space: '20px',
+  mainGreenColor: '#00aa47',
 };
+
+const fontSize = {
+  fontLarge: '28px',
+  fontLargeMedium: '22px',
+  fontMedium: '16px',
+  fontSmall: '12px',
+};
+
+const theme = { color, fontSize };
 
 export default theme;
 
 // scpt 엔터~
-// background-color: ${({ theme }) => theme.background};
-// 메인컬러 : Fee500;
-// 서브컬러 : 000000
-// 그레이컬러: c4c4c4
-// 컨테이너 Radius : 12px;

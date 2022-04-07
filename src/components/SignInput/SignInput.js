@@ -21,10 +21,10 @@ export default function SignInput({
 
 const InputForm = styled.input`
   color: #000000;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.fontSize.fontMedium};
   padding: 10px 10px 10px 0;
   margin-bottom: 20px;
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid ${({ theme }) => theme.color.GreyColor};
   &:focus {
     outline: none;
   }
