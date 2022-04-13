@@ -1,6 +1,6 @@
-## KaKaoPay UI Developer
+## KaKaoPay
 
-카카오페이 UI 개발자 사전과제를 소개합니다. <br>
+카카오페이를 레퍼런스로 간단한 로그인&회원가입, 모바일 애니메이션을 구현했습니다. <br>
 **해상도 320px 기준(iPhone5/SE)** 으로 구현했습니다.
 
 ### Overview
